@@ -1,41 +1,22 @@
 let todoList = {
     todos: [],
 
-    displayTodos(){
-        if(this.todos.length ===0){
-            console.log("Your list is empty, please add some");
-        } else {
-            for(let i=0; i < this.todos.length ;i++){
-
-                if(this.todos[i].completed){
-                    console.log("(X)  " + this.todos[i].todoText);
-
-                } else {
-                    console.log("( )  " + this.todos[i].todoText);
-                }
-
-            }
-        }
-    },
+    
     addTodo(todoText){
         this.todos.push({
             todoText: todoText,
             completed: false
         });
-        this.displayTodos();
     },
     changeTodo(position, todoText){
         this.todos[position].todoText = todoText;
-        this.displayTodos();
     },
     deleteTodo(position){
         this.todos.splice(position,1)
-        this.displayTodos();
     },
     toggleCompleted(position){
         let todo = this.todos[position];
         todo.completed = !todo.completed;
-        this.displayTodos();
     },
 
 
@@ -59,7 +40,6 @@ let todoList = {
             }
         }
 
-        this.displayTodos();
         
     }
 }
@@ -73,27 +53,36 @@ let handlers = {
     },
     toggleAll: ()=>{
         todoList.toggleAll();
+        view.displayTodos();
     },
     addTodo:()=>{
      let input = document.getElementById("input");
-        todoList.addTodo(input.value);
+        
+            todoList.addTodo(input.value);
+        
+        
         input.value = "";
         view.displayTodos();
+
     },
     changeTodo:()=>{
         let changeInput = document.getElementById("changeInput")
         let positionSelect = document.getElementById("positionSelect");
-        todoList.changeTodo(positionSelect.value,changeInput.value)
+        todoList.changeTodo(positionSelect.value, changeInput.value)
         changeInput.value = "";
+        view.displayTodos();
+
     },
     deleteTodo:()=>{
         let deleteSelect = document.getElementById("deleteSelect");
         todoList.deleteTodo(deleteSelect.value)
-        todoList.displayTodos();
+        view.displayTodos();
+
     },
     toggleTodo: ()=>{
         let toggleSelect = document.getElementById("toggleSelect");
         todoList.toggleCompleted(toggleSelect.value);
+        view.displayTodos();
     }
 
 }
@@ -106,8 +95,14 @@ let view = {
         todoUl.innerHTML = ""
         for(let i=0; i < todoList.todos.length; i++){
             let todoLi = document.createElement("li");
-            todoLi.textContent = todoList.todos[i].todoText + todoList.todos[i].completed
-            todoUl.appendChild(todoLi);
+
+            if(todoList.todos[i].completed === true){
+                todoLi.textContent = "(x) " + todoList.todos[i].todoText;
+            } else {
+                todoLi.textContent = "( ) " + todoList.todos[i].todoText;
+            }
+            
+        todoUl.appendChild(todoLi);
         }
     }
 
