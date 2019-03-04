@@ -6,24 +6,57 @@
 <html>
     <body>
         <p>TodoList App</p>
+        
         <div>
                 <button onclick="handlers.displayTodos()">Display todos</button>
                 <button onclick="handlers.toggleAll()">Toggle All Todos</button>
         </div>
         <input type="text" placeholder="Please add your todo" id="input" > 
         <button onclick="handlers.addTodo()">Add Todo</button>
-<div>
-        <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
 
-        <input placeholder="Enter new todo">
-    </div>
-        <button onclick="handlers.changeTodo()">Change Todo</button>
+
+
+        <div>
+            <select id="positionSelect" >
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <input id="changeInput" placeholder="Enter new todo">
+            <button onclick="handlers.changeTodo()">Change Todo</button>
+
+        </div>
+
+
+
+        <div>
+            <select id="deleteSelect" >
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <button onclick="handlers.deleteTodo()">Delete Todo</button>
+
+        </div>
+
+
+
+        <div>
+            <select id="toggleSelect" >
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <button onclick="handlers.toggleTodo()">Toggle Todo</button>
+        </div>
+
+
+        <ul>
+            
+        </ul>
+
         
 
     </body>
-    <script src="script.js" ></script>
+<script src="script.js" ></script>
 </html>

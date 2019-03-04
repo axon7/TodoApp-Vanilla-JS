@@ -1,14 +1,6 @@
 let todoList = {
-    todos: [
-        {
-            todoText: "hello",
-            completed: true
-        },
-        {
-            todoText: "hi",
-            completed: true
-        }
-    ],
+    todos: [],
+
     displayTodos(){
         if(this.todos.length ===0){
             console.log("Your list is empty, please add some");
@@ -24,9 +16,6 @@ let todoList = {
 
             }
         }
-
-
-        
     },
     addTodo(todoText){
         this.todos.push({
@@ -76,15 +65,7 @@ let todoList = {
 }
 
 
-// let displayButton = document.getElementById("displayButton");
-// displayButton.addEventListener("click", ()=>{
-//     todoList.displayTodos();
-// });
 
-// let toggleButton = document.getElementById("toggleAllButton");
-// toggleButton.addEventListener("click", ()=>{
-//     todoList.toggleAll();
-// })
 
 let handlers = {
     displayTodos: ()=>{
@@ -97,6 +78,38 @@ let handlers = {
      let input = document.getElementById("input");
         todoList.addTodo(input.value);
         input.value = "";
+        view.displayTodos();
+    },
+    changeTodo:()=>{
+        let changeInput = document.getElementById("changeInput")
+        let positionSelect = document.getElementById("positionSelect");
+        todoList.changeTodo(positionSelect.value,changeInput.value)
+        changeInput.value = "";
+    },
+    deleteTodo:()=>{
+        let deleteSelect = document.getElementById("deleteSelect");
+        todoList.deleteTodo(deleteSelect.value)
+        todoList.displayTodos();
+    },
+    toggleTodo: ()=>{
+        let toggleSelect = document.getElementById("toggleSelect");
+        todoList.toggleCompleted(toggleSelect.value);
     }
+
+}
+
+
+let view = {
+    displayTodos: ()=>{
+        let todoUl = document.querySelector("ul");
+        //adds only one element not twice as many
+        todoUl.innerHTML = ""
+        for(let i=0; i < todoList.todos.length; i++){
+            let todoLi = document.createElement("li");
+            todoLi.textContent = todoList.todos[i].todoText + todoList.todos[i].completed
+            todoUl.appendChild(todoLi);
+        }
+    }
+
 }
 
